@@ -1,0 +1,44 @@
+:root {
+    /* Font Families ********************/
+    --font-family-primary: "Roboto Regular", sans-serif;
+    --font-family-bold: "Roboto Bold", sans-serif;
+
+    /* Font Sizes ********************/
+    --font-size-base: 1rem;
+    --font-size-xsmall: 0.75rem;
+    --font-size-small: 0.875rem;
+    --font-size-medium: 1.125rem;
+    --font-size-large: 1.25rem;
+    --font-size-xlarge: 1.5rem;
+    --font-size-xxlarge: 2rem;
+    --font-size-xxxlarge: 6rem;
+
+    /* Colors ********************/
+    --color-background-body:  #86c7f6;
+    --color-background-section: #1f2847;
+    --color-progress-indicator-active: #ffffff;
+    --color-progress-indicator: #A3AACE;
+    --color-button-border-inactive: #586082;
+    --color-button-border-active: #0b80ef;
+    --color-text-white: #ffffff;
+    --color-button-active: #0b80ef;
+    --color-button-disabled: #586082;
+    --color-review-content--incorect: #ff0000;
+    --color-review-content--correct: #008000;
+
+    /* Spacing ********************/
+    --spacing-base: 1rem;
+    --spacing-xsmall: 0.25rem;
+    --spacing-small: 0.5rem;
+    --spacing-medium: 1.15rem;
+    --spacing-large: 2rem;
+    --spacing-xlarge: 3rem;
+    --spacing-xxlarge: 4rem;
+
+    /* Border Radius ********************/
+    --border-radius-base: 0.5rem;
+
+    /* Shadows ********************/
+    --shadow-base: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    --shadow-heading: rgba(24, 26, 27, 0.5) 0px 0.1rem 0.2rem;
+}

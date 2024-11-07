@@ -1,0 +1,204 @@
+/* Body Content Style  ********************/
+body {
+    min-height: 100vh;
+    width: 100%;
+    background-color: var(--color-background-body);
+}
+
+/* Main Style ********************/
+.quiz {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Section Style ********************/
+.quiz__section {
+    max-width: 500px;
+    min-width: 350px;
+    width: 100%;
+    height: 70%;
+    background-color: var(--color-background-section);
+    color: var(--color-text-white);
+    border-radius: var(--border-radius-base);
+    padding: var(--spacing-medium);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.quiz__button {
+    background-color: var(--color-button-active);
+    border: none;
+    border-radius: var(--border-radius-base);
+    color: var(--color-text-white);
+    font-size: var(--font-size-base);
+    padding: var(--spacing-base) var(--spacing-large);
+    cursor: pointer;
+    width: 100%;
+}
+
+/* Start Screen Section Style ********************/
+.quiz__start-screen {
+
+}
+
+.quiz__title {
+    font-size: var(--font-size-xxlarge);
+}
+
+.quiz__description {
+    font-size: var( --font-size-medium);
+}
+
+.quiz__button--start{
+
+}
+
+/* Question Section Style ********************/
+.quiz__question-screen {
+    
+}
+
+.quiz__progress {
+    
+}
+
+.quiz__progress-indicator {
+    color: var(--color-progress-indicator);
+    font-size: var(--font-size-xlarge);
+}
+
+.quiz__current-question {
+    color: var(--color-progress-indicator-active);
+    font-family: var(--font-family-bold)
+}
+
+.quiz__total-questions {
+
+}
+
+.quiz__question-text {
+    font-size: var( --font-size-medium);
+}
+
+.quiz__answer-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 100%;
+    height: 50%;
+}
+
+.quiz__answer {
+    width: 100%;
+    font-size: var(--font-size-base);
+    padding: var(--spacing-base) var(--spacing-large);
+    background: none;
+    border-radius: var(--border-radius-base);
+    color: var(--color-text-white);
+    border-style: none;
+    border: 2px solid var(--color-button-border-inactive);
+    cursor: pointer;
+    transition: border-color 0.3s linear;
+}
+
+.quiz__answer:hover {
+    border-color: var(--color-button-border-active);
+}
+
+.quiz__button--next {
+    width: 100%;
+    background-color: var(--color-button-disabled);
+}
+
+/* Score Screen Section Style ********************/
+.quiz__score-screen {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.quiz__title {
+
+}
+
+.quiz__score {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    gap: 1rem;
+}
+
+.quiz__score-label {
+    font-size: var(--font-size-xlarge);
+    color: var(--color-progress-indicator);
+}
+
+.quiz__score-item {
+    font-size: var(--font-size-xlarge);
+    color: var(--color-progress-indicator);
+}
+
+.quiz__final-content {
+    font-family: var(--font-family-bold);
+    color: var(--color-progress-indicator-active);
+}
+
+.quiz__total-content {
+
+}
+
+.quiz__button--review {
+    margin-bottom: var(--spacing-small);
+}
+
+/* End Screen Section Style ********************/
+.quiz__review-screen {
+
+}
+
+.quiz__review-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 100%;
+    width: 100%;
+}
+
+.quiz__review-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.quiz__review-question {
+
+}
+
+.quiz__review-label {
+    font-size: var(--font-size-large);
+    color: var(--color-progress-indicator);
+}
+
+.quiz__review-content {
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+.quiz__review-content--incorect {
+    color: var(--color-review-content--incorect);
+}
+
+.quiz__review-content--correct {
+    color: var(--color-review-content--correct);
+}
