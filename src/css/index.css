@@ -39,6 +39,11 @@ body {
     padding: var(--spacing-base) var(--spacing-large);
     cursor: pointer;
     width: 100%;
+    transition: background-color 0.3s linear;
+}
+
+.quiz__button:hover {
+    background-color: var(--color-button-hover);
 }
 
 /* Start Screen Section Style ********************/
@@ -103,16 +108,15 @@ body {
     border-style: none;
     border: 2px solid var(--color-button-border-inactive);
     cursor: pointer;
-    transition: border-color 0.3s linear;
+    transition: border-color, background-color 0.3s linear;
 }
 
 .quiz__answer:hover {
-    border-color: var(--color-button-border-active);
+    background-color: var(--color-button-background-hover);
 }
 
 .quiz__button--next {
-    width: 100%;
-    background-color: var(--color-button-disabled);
+
 }
 
 /* Score Screen Section Style ********************/
@@ -201,4 +205,12 @@ body {
 
 .quiz__review-content--correct {
     color: var(--color-review-content--correct);
+}
+
+.active {
+    border-color: var(--color-button-border-active); 
+}
+
+.quiz__section.hidden {
+    display: none;
 }
