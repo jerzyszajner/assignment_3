@@ -44,4 +44,4 @@ This project is licensed under the [MIT License](./license.txt).
 
 ## Live Demo
 
-[Visit the Quiz on Netlify]()
+[Visit the Quiz on Netlify](https://javascript-quiz-js.netlify.app/)
