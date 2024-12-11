@@ -1,95 +1,174 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./css/reset.css" />
     <link rel="stylesheet" href="./css/fonts.css" />
     <link rel="stylesheet" href="./css/variables.css" />
     <link rel="stylesheet" href="./css/index.css" />
-    <link rel="apple-touch-icon" href="./assets/icons/favicon-apple-touch-icon.png" type="image/png" />
+    <link rel="stylesheet" href="./css/footer.css" />
+    <link
+      rel="apple-touch-icon"
+      href="./assets/icons/favicon-apple-touch-icon.png"
+      type="image/png"
+    />
     <link rel="icon" href="./assets/icons/favicon.ico" type="image/x-icon" />
     <link rel="icon" href="./assets/icons/favicon-32x32.png" type="image/png" />
     <link rel="icon" href="./assets/icons/favicon-16x16.png" type="image/png" />
-    <link rel="icon" href="./assets/icons/favicon-android-chrome-512x512.png" type="image/png" />
-    <link rel="icon" href="./assets/icons/favicon-android-chrome-192x192.png" type="image/png" />
-    <title>JavaScript Quiz</title>    
-</head>
+    <link
+      rel="icon"
+      href="./assets/icons/favicon-android-chrome-512x512.png"
+      type="image/png"
+    />
+    <link
+      rel="icon"
+      href="./assets/icons/favicon-android-chrome-192x192.png"
+      type="image/png"
+    />
+    <title>JavaScript Quiz</title>
+  </head>
 
-<body>
-
+  <body>
     <main class="quiz">
-        <!-- Quiz Start Section -->
-        <section class="quiz__start-screen quiz__section">
-            <h1 class="quiz__title">JavaScript Quiz</h1>
-            <p class="quiz__description">This quiz contains 25 questions.</p>
-            <button class="quiz__button quiz__button--start">Start Quiz</button>
-        </section>
+      <!-- Alert -->
+      <div class="quiz__alert"></div>
+      <!-- Quiz Start Section -->
+      <section class="quiz__start-screen quiz__section">
+        <h1 class="quiz__title">JavaScript Quiz</h1>
+        <p class="quiz__description">This quiz contains 10 questions.</p>
+        <button class="quiz__button quiz__button--start">Start Quiz</button>
+      </section>
 
-        <!-- Quiz Question Section -->
-        <section class="quiz__question-screen quiz__section hidden">
-            <!-- Progress Indicator -->
-            <div class="quiz__progress" aria-live="polite">
-                <span class="quiz__progress-indicator">
-                    Question <span class="quiz__current-question">1</span> / <span
-                        class="quiz__total-questions">25</span>
-                </span>
-            </div>
+      <!-- Quiz Question Section -->
+      <section class="quiz__question-screen quiz__section hidden">
+        <!-- Progress Indicator -->
+        <div class="quiz__progress" aria-live="polite">
+          <span class="quiz__progress-indicator">
+            Question <span class="quiz__current-question">1</span> /
+            <span class="quiz__total-questions">10</span>
+          </span>
+        </div>
 
-            <!-- Question Container -->
-            <article class="quiz__question-container">
-                <h2 id="question-title" class="quiz__question-text">Question will appear here</h2>
-            </article>
+        <!-- Question Container -->
+        <article class="quiz__question-container">
+          <h2 id="question" class="quiz__question-text">
+            Question will appear here
+          </h2>
+        </article>
 
-            <!-- Answers Container -->
-            <div class="quiz__answer-container">
-                <button class="quiz__answer">Option 1</button>
+        <!-- Answers Container -->
+        <div id="answer-buttons" class="quiz__answer-container">
+          <!-- <button class="quiz__answer">Option 1</button>
                 <button class="quiz__answer">Option 2</button>
                 <button class="quiz__answer">Option 3</button>
-                <button class="quiz__answer">Option 4</button>
-            </div>
-                <button class="quiz__button quiz__button--next">Next Question</button>
-        </section>
+                <button class="quiz__answer">Option 4</button> -->
+        </div>
+        <button class="quiz__button quiz__button--next">Next Question</button>
+      </section>
 
-        <!-- Quiz Score Section -->
-        <section class="quiz__score-screen quiz__section hidden">
-            <h2 class="quiz__title">Your Score</h2>
-            <div class="quiz__score">
-                <span class="quiz__score-label">You scored:</span>
-                <div class="quiz__score-item">
-                    <span class="quiz__final-content">0</span> / <span class="quiz__total-content">25</span>
-                </div>
-            </div>
-                <button class="quiz__button quiz__button--review">Review Answers</button>
-                <button class="quiz__button quiz__button--restart1">Restart Quiz</button>     
-        </section>
+      <!-- Quiz Score Section -->
+      <section class="quiz__score-screen quiz__section hidden">
+        <h2 class="quiz__title">Your Score</h2>
+        <div class="quiz__score">
+          <span class="quiz__score-label">You scored:</span>
+          <div class="quiz__score-item">
+            <span class="quiz__final-content">0</span> /
+            <span class="quiz__total-content">10</span>
+          </div>
+        </div>
+        <button class="quiz__button quiz__button--review">
+          Review Answers
+        </button>
+        <button class="quiz__button quiz__button--restart1">
+          Restart Quiz
+        </button>
+      </section>
 
-        <!-- Quiz Review Section -->
-        <section class="quiz__review-screen quiz__section hidden">
-            <h2 class="quiz__title">Answer Review</h2>
-            <ul class="quiz__review-list">
-                <li class="quiz__review-item quiz__review-question">
-                    <span class="quiz__review-label">Question:</span>
-                    <span class="quiz__review-content">Question text here</span>
-                </li>
-                <li class="quiz__review-item quiz__user-answer">
-                    <span class="quiz__review-label">Your answer:</span>
-                    <span class="quiz__review-content">User's answer here</span>
-                </li>
-                <li class="quiz__review-item quiz__result">
-                    <span class="quiz__review-label">Result:</span>
-                    <span class="quiz__review-content quiz__review-content--incorect">Incorrect</span>
-                </li>
-                <li class="quiz__review-item quiz__correct-answer">
-                    <span class="quiz__review-label">Correct answer:</span>
-                    <span class="quiz__review-content quiz__review-content--correct">Correct answer here</span>
-                </li>
-            </ul>
-                <button class="quiz__button quiz__button--restart2">Restart Quiz</button>                
-        </section>
+      <!-- Quiz Review Section -->
+      <section class="quiz__review-screen quiz__section hidden">
+        <h2 class="quiz__title">Incorrect Answers Review</h2>
+        <ul class="quiz__review-list">
+          <li class="quiz__review-item quiz__review-question">
+            <span class="quiz__review-label">Question:</span>
+            <span class="quiz__review-content">Question text here</span>
+          </li>
+          <li class="quiz__review-item quiz__user-answer">
+            <span class="quiz__review-label">Your answer was:</span>
+            <span class="quiz__review-content">User's answer here</span>
+          </li>
+          <li class="quiz__review-item quiz__correct-answer">
+            <span class="quiz__review-label">Correct answer:</span>
+            <span class="quiz__review-content quiz__review-content--correct"
+              >Correct answer here</span
+            >
+          </li>
+        </ul>
+        <button class="quiz__button quiz__button--restart2">
+          Restart Quiz
+        </button>
+      </section>
     </main>
+    <!-- Page footer including the links and copyright  -->
+    <footer class="footer">
+      <p class="footer__paragraph">
+        &copy; 2024 Jerzy Szajner. Licensed under the
+        <a
+          href="../license.txt"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="View the MIT License details"
+        >
+          MIT License </a
+        >.
+      </p>
+      <ul class="footer__list">
+        <li class="footer__item">
+          <a
+            class="footer__link"
+            href="#"
+            title="Visit Instagram"
+            aria-label="Visit Instagram"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Instagram</a
+          >
+        </li>
+        <li class="footer__item">
+          <a
+            class="footer__link"
+            href="#"
+            title="Visit Facebook"
+            aria-label="Visit Facebook"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Facebook</a
+          >
+        </li>
+        <li class="footer__item">
+          <a
+            class="footer__link"
+            href="#"
+            title="Visit LinkedIn"
+            aria-label="Visit LinkedIn"
+            target="_blank"
+            rel="noopener noreferrer"
+            >LinkedIn</a
+          >
+        </li>
+        <li class="footer__item">
+          <a
+            class="footer__link"
+            href="#"
+            title="Visit Vimeo"
+            aria-label="Visit Vimeo"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Vimeo</a
+          >
+        </li>
+      </ul>
+    </footer>
     <script src="./js/app.js"></script>
-</body>
-
+  </body>
 </html>

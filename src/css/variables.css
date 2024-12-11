@@ -14,7 +14,7 @@
     --font-size-xxxlarge: 6rem;
 
     /* Colors ********************/
-    --color-background-body:  #86c7f6;
+    --color-background-body: #86c7f6;
     --color-background-section: #1f2847;
     --color-progress-indicator-active: #ffffff;
     --color-progress-indicator: #A3AACE;
@@ -23,9 +23,9 @@
     --color-text-white: #ffffff;
     --color-button-active: #0b80ef;
     --color-button-disabled: #586082;
-    --color-button-hover:  #3ca5f0;
+    --color-button-hover: #3ca5f0;
     --color-button-background-hover: #29355e;
-    --color-review-content--incorect: #ff0000;
+    --color-alert: #ff0000;
     --color-review-content--correct: #008000;
 
     /* Spacing ********************/
