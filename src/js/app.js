@@ -1,3 +1,6 @@
+//========================================
+//=== QUIZ QUESTIONS DATA
+//========================================
 const questions = [
   {
     question:
@@ -100,62 +103,81 @@ const questions = [
     ],
   },
 ];
-
-const startScreenSection = document.querySelector(".quiz__start-screen");
-const buttonStart = document.querySelector(".quiz__button--start");
-
-const questionScreenSection = document.querySelector(".quiz__question-screen");
-const quizCurrentQuestion = document.querySelector(".quiz__current-question");
-const answerButtonsContainer = document.querySelector("#answer-buttons");
-const buttonQuizNext = document.querySelector(".quiz__button--next");
-const questionElement = document.querySelector("#question");
-
-const questionScoreSection = document.querySelector(".quiz__score-screen");
-const buttonQuizReview = document.querySelector(".quiz__button--review");
-const buttonQuizRestart1 = document.querySelector(".quiz__button--restart1");
-const finalScoreElement = document.querySelector(".quiz__final-content");
-
-const quizReviewSection = document.querySelector(".quiz__review-screen");
-const buttonQuizRestart2 = document.querySelector(".quiz__button--restart2");
+//========================================
+//=== SELECTING DOM ELEMENTS
+//========================================
+const startScreen = document.querySelector(".quiz__start-screen");
+const startButton = document.querySelector(".quiz__button--start");
+const questionScreen = document.querySelector(".quiz__question-screen");
+const questionCounter = document.querySelector(".quiz__current-question");
+const answerContainer = document.querySelector("#answer-buttons");
+const nextButton = document.querySelector(".quiz__button--next");
+const questionText = document.querySelector("#question");
+const scoreScreen = document.querySelector(".quiz__score-screen");
+const reviewButton = document.querySelector(".quiz__button--review");
+const restartButton1 = document.querySelector(".quiz__button--restart1");
+const finalScore = document.querySelector(".quiz__final-content");
+const reviewScreen = document.querySelector(".quiz__review-screen");
+const restartButton2 = document.querySelector(".quiz__button--restart2");
 const reviewList = document.querySelector(".quiz__review-list");
+const alertBox = document.querySelector(".quiz__alert");
 
+//========================================
+//=== INITIALIZATION VARIABLES
+//========================================
 let currentQuestionIndex = 0;
 let incorrectAnswersCount = 0;
 
-// Start the quiz
-const startQuiz = () => {
-  buttonStart.addEventListener("click", () => {
-    startScreenSection.classList.add("hidden");
-    questionScreenSection.classList.remove("hidden");
-    setQuestion();
-  });
+//========================================
+//=== QUIZ LOGIC FUNCTIONS
+//========================================
+// Alert
+const showAlert = (message) => {
+  alertBox.textContent = message;
+  alertBox.classList.add("visible");
+  setTimeout(() => alertBox.classList.remove("visible"), 2000);
 };
 
-// Display the current question and answers
-const setQuestion = () => {
+// Start the quiz
+const startQuiz = () => {
+  startScreen.classList.add("hidden");
+  questionScreen.classList.remove("hidden");
+  displayQuestion();
+};
+
+// Show the review screen with user's incorrect answers
+const showReview = () => {
+  scoreScreen.classList.add("hidden");
+  reviewScreen.classList.remove("hidden");
+  generateReview();
+};
+
+// Display the current question and answers dynamically
+const displayQuestion = () => {
   const currentQuestion = questions[currentQuestionIndex];
-  questionElement.textContent = currentQuestion.question;
-  answerButtonsContainer.innerHTML = ""; // Clear previous answers
+  questionText.textContent = currentQuestion.question;
 
-  quizCurrentQuestion.textContent = currentQuestionIndex + 1; // Update question counter
+  // Update question counter
+  questionCounter.textContent = currentQuestionIndex + 1;
 
+  // Clear previous answers and generate new buttons
+  answerContainer.innerHTML = "";
   currentQuestion.answers.forEach((answer) => {
     const button = document.createElement("button");
-    button.textContent = answer.text;
     button.classList.add("quiz__answer");
-    answerButtonsContainer.appendChild(button);
-
+    answerContainer.appendChild(button);
+    button.textContent = answer.text;
     button.addEventListener("click", () => {
-      handleAnswerClick(button, currentQuestion.answers);
+      updateAnswerSelection(button, currentQuestion.answers);
     });
   });
 };
 
-// Handle selecting an answer
-const handleAnswerClick = (clickedButton, answers) => {
+// Handle the logic for selecting an answer
+const updateAnswerSelection = (clickedButton, answers) => {
   // Remove "active" class from all buttons
-  answerButtonsContainer.querySelectorAll(".quiz__answer").forEach((btn) => {
-    btn.classList.remove("active");
+  answerContainer.querySelectorAll(".quiz__answer").forEach((button) => {
+    button.classList.remove("active");
   });
 
   // Add "active" class to the clicked button
@@ -167,7 +189,7 @@ const handleAnswerClick = (clickedButton, answers) => {
   });
 };
 
-// Move to the next question or display the score
+// Handle the transition to the next question or end the quiz
 const handleNextQuestion = () => {
   const currentQuestion = questions[currentQuestionIndex];
   const selectedAnswer = currentQuestion.answers.find((answer) => {
@@ -175,15 +197,8 @@ const handleNextQuestion = () => {
   });
 
   if (!selectedAnswer) {
-    // Show styled alert if no answer is selected
-    const alertBox = document.querySelector(".quiz__alert");
-    alertBox.textContent = "Please select an answer.";
-    alertBox.classList.add("visible");
-
-    setTimeout(() => {
-      alertBox.classList.remove("visible");
-    }, 2000);
-
+    // Show alert if no answer is selected
+    showAlert("Please select an answer.");
     return;
   }
 
@@ -195,52 +210,64 @@ const handleNextQuestion = () => {
   currentQuestionIndex++;
 
   if (currentQuestionIndex < questions.length) {
-    setQuestion();
+    displayQuestion();
   } else {
-    questionScreenSection.classList.add("hidden");
-    questionScoreSection.classList.remove("hidden");
-    finalScoreElement.textContent = questions.length - incorrectAnswersCount; // Display the final score
+    questionScreen.classList.add("hidden");
+    scoreScreen.classList.remove("hidden");
+    finalScore.textContent = questions.length - incorrectAnswersCount; // Display the final score
   }
 };
 
+// Generate the review of incorrect answers
 const generateReview = () => {
-  const reviewList = document.querySelector(".quiz__review-list");
-  reviewList.innerHTML = ""; // Clear previous answers
+  reviewList.textContent = ""; // Clear previous answers
 
   questions.forEach((question) => {
     // Find the correct answer for the current question
-    const correctAnswer = question.answers.find((answer) => {
-      return answer.correct;
-    }).text;
+    const correctAnswer = question.answers.find(
+      (answer) => answer.correct
+    ).text;
 
     // Find the user's selected answer or default to "No Answer"
     const userAnswer =
-      question.answers.find((answer) => {
-        return answer.selected;
-      })?.text || "No Answer";
+      question.answers.find((answer) => answer.selected)?.text || "No Answer";
 
     // Add review items only if the user's answer is incorrect
     if (userAnswer !== correctAnswer) {
       // Add question to the review section
-      const reviewQuestionItem = document.createElement("li");
-      reviewQuestionItem.classList.add(
-        "quiz__review-item",
-        "quiz__review-question"
-      );
-      reviewQuestionItem.innerHTML = `
-        <span class="quiz__review-label">Question:</span>
-        <span class="quiz__review-content">${question.question}</span>
-      `;
-      reviewList.appendChild(reviewQuestionItem);
+      const questionItem = document.createElement("li");
+      questionItem.classList.add("quiz__review-item", "quiz__review-question");
+
+      const reviewQuestionLabel = document.createElement("span");
+      reviewQuestionLabel.classList.add("quiz__review-label");
+
+      const reviewQuestionContent = document.createElement("span");
+      reviewQuestionContent.classList.add("quiz__review-content");
+
+      reviewList.append(questionItem);
+      questionItem.append(reviewQuestionLabel, reviewQuestionContent);
+
+      reviewQuestionLabel.textContent = `Question`;
+      reviewQuestionContent.textContent = `${question.question}`;
 
       // Add user's incorrect answer to the review section
       const userAnswerItem = document.createElement("li");
       userAnswerItem.classList.add("quiz__review-item", "quiz__user-answer");
-      userAnswerItem.innerHTML = `
-        <span class="quiz__review-label">Your answer was:</span>
-        <span class="quiz__review-content quiz__review-content--incorrect">${userAnswer}</span>
-      `;
-      reviewList.appendChild(userAnswerItem);
+
+      const reviewAnswerLabel = document.createElement("span");
+      reviewAnswerLabel.classList.add("quiz__review-label");
+
+      const reviewAnswerContent = document.createElement("span");
+      reviewAnswerContent.classList.add(
+        "quiz__review-content",
+        "quiz__review-content--incorrect"
+      );
+
+      reviewList.append(userAnswerItem);
+      userAnswerItem.append(reviewAnswerLabel, reviewAnswerContent);
+
+      reviewAnswerLabel.textContent = `Your answer was:`;
+      reviewAnswerContent.textContent = `${userAnswer}`;
 
       // Add the correct answer to the review section
       const correctAnswerItem = document.createElement("li");
@@ -248,16 +275,26 @@ const generateReview = () => {
         "quiz__review-item",
         "quiz__correct-answer"
       );
-      correctAnswerItem.innerHTML = `
-        <span class="quiz__review-label">Correct answer:</span>
-        <span class="quiz__review-content quiz__review-content--correct">${correctAnswer}</span>
-      `;
-      reviewList.appendChild(correctAnswerItem);
+
+      const correctAnswerLabel = document.createElement("span");
+      correctAnswerLabel.classList.add("quiz__review-label");
+
+      const correctAnswerContent = document.createElement("span");
+      correctAnswerContent.classList.add(
+        "quiz__review-content",
+        "quiz__review-content--correct"
+      );
+
+      reviewList.append(correctAnswerItem);
+      correctAnswerItem.append(correctAnswerLabel, correctAnswerContent);
+
+      correctAnswerLabel.textContent = `Correct answer:`;
+      correctAnswerContent.textContent = `${correctAnswer}`;
     }
   });
 };
 
-// Reset the quiz
+// Reset the quiz to the initial state
 const resetQuiz = () => {
   currentQuestionIndex = 0;
   incorrectAnswersCount = 0;
@@ -269,19 +306,16 @@ const resetQuiz = () => {
     });
   });
 
-  questionScoreSection.classList.add("hidden");
-  quizReviewSection.classList.add("hidden");
-  startScreenSection.classList.remove("hidden");
+  scoreScreen.classList.add("hidden");
+  reviewScreen.classList.add("hidden");
+  startScreen.classList.remove("hidden");
 };
 
-buttonQuizNext.addEventListener("click", handleNextQuestion);
-buttonQuizReview.addEventListener("click", () => {
-  questionScoreSection.classList.add("hidden");
-  quizReviewSection.classList.remove("hidden");
-  generateReview();
-});
-
-buttonQuizRestart1.addEventListener("click", resetQuiz);
-buttonQuizRestart2.addEventListener("click", resetQuiz);
-
-startQuiz();
+//========================================
+//=== EVENT LISTENERS
+//========================================
+nextButton.addEventListener("click", handleNextQuestion);
+reviewButton.addEventListener("click", showReview);
+startButton.addEventListener("click", startQuiz);
+restartButton1.addEventListener("click", resetQuiz);
+restartButton2.addEventListener("click", resetQuiz);
