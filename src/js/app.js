@@ -192,9 +192,7 @@ const updateAnswerSelection = (clickedButton, answers) => {
 // Handle the transition to the next question or end the quiz
 const handleNextQuestion = () => {
   const currentQuestion = questions[currentQuestionIndex];
-  const selectedAnswer = currentQuestion.answers.find((answer) => {
-    return answer.selected;
-  });
+  const selectedAnswer = currentQuestion.answers.find((answer) => answer.selected);
 
   if (!selectedAnswer) {
     // Show alert if no answer is selected
@@ -225,8 +223,7 @@ const generateReview = () => {
   questions.forEach((question) => {
     // Find the correct answer for the current question
     const correctAnswer = question.answers.find(
-      (answer) => answer.correct
-    ).text;
+      (answer) => answer.correct).text;
 
     // Find the user's selected answer or default to "No Answer"
     const userAnswer =
